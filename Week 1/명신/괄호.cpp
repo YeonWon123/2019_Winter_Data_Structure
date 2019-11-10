@@ -1,13 +1,26 @@
 #include<iostream>
 #include<string>
-#include<stack>
 using namespace std;
+
+class stack_imake
+{
+public:
+	stack_imake(); //스택 초기화 진행 (스택생성후 젤 먼저 호출되어야 하는 함수)
+	void push(char data); //스택에 데이터저장, 매게변수 data로 전달된 값을 저장함
+	void pop(); //마지막에 저장된 요소를 삭제, 삭제하는 데이터는 반환됨, 이함수를 호출하려면 하나이상의 값이 스택에 있어야함
+	int top(); //마지막에 저장된 요소를 반환하되 삭제하지않음
+	bool empty(); //stack이 비어있는지 확인
+	~stack_imake();
+private:
+	//char* cp = new char  //배열을 이렇게 생성하면 runtime_error 왜?
+	char* cp = new char[1000];
+	int topindex; //-1로 초기화
+};
 
 int Array_size(char*arr);
 
 int main()
 {
-
 	int size;
 	int arrSize;
 	bool flag;
@@ -17,7 +30,7 @@ int main()
 	for (int i = 0; i < size; i++)
 	{
 		//사용할 변수 초기화
-		stack<char> st;
+		stack_imake st;
 		char arr[100];
 		cin >> arr;		//space,enter 가 나올때까지 입력받음
 		arrSize = Array_size(arr);
@@ -51,7 +64,6 @@ int main()
 			flag = false;
 		}
 
-
 		//flag true면 YES, 아니면 NO 출력
 		if (flag)
 		{
@@ -62,11 +74,8 @@ int main()
 			cout << "NO" << endl;
 		}
 
-
 	}
 }
-
-//내가만든 자주 사용하는 함수 어떻게 따로 저장해놓는지
 
 int Array_size(char *arr)
 {
@@ -81,11 +90,35 @@ int Array_size(char *arr)
 	return arrSize;
 }
 
-/*
-stack 사용법
-1.#include<stack>	//stack class 받아오기
-2.stack<datatype> st(object명)  // datatype의 stack 생성
-3. st.push('char')	//stack에 'char'data 집어넣기
-	st.pop()	//stack 맨위에 data 꺼내기
-	st.empty() //stack 비어있는지 확인 맞으면 true
-*/
+
+stack_imake::stack_imake()
+{
+	topindex = -1;
+}
+void stack_imake::push(char input)
+{
+	topindex++;
+	cp[topindex] = input;
+
+	return;
+}
+void stack_imake::pop()
+{
+	cp[topindex] = '\0';
+	topindex--;
+
+	return;
+}
+int stack_imake::top()
+{
+	return topindex;
+}
+bool stack_imake::empty()
+{
+	if (topindex >= 0) return false;
+	else return true;
+}
+stack_imake::~stack_imake()
+{
+	delete[] cp;
+}
