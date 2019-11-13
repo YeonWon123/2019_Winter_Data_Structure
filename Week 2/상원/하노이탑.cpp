@@ -1,20 +1,27 @@
 #include<iostream>
-#include<vector>
 using namespace std;
 
-vector<pair<int, int>> v;
+int sw = 0;
+int var = 0;
 void HanoiMove(int num, int from, int by, int to)
 {
+
 	if (num == 1)
-		v.push_back({ from,to });
+	{
+		if (sw == 1)
+			cout << from << " " << to << "\n";
+		var += 1;
+	}
 
 	else
 	{
 		HanoiMove(num - 1, from, to, by);
-		v.push_back({ from,to });
+		if (sw == 1)
+			cout << from << " " << to << "\n";
 		HanoiMove(num - 1, by, from, to);
+		var += 1;
 	}
-
+	
 }
 
 int main(void)
@@ -24,14 +31,20 @@ int main(void)
 	
 	int N;
 	cin >> N;
-
-	HanoiMove(N, 1, 2, 3);
-	
-	cout << v.size() << "\n";
-	for (int i = 0; i < v.size(); i++)
+	if (N <= 20)
 	{
-		cout << v[i].first << " " << v[i].second << "\n";
+		HanoiMove(N, 1, 2, 3);
+		cout << var << "\n";
+		sw = 1;
+		HanoiMove(N, 1, 2, 3);
 	}
+	else
+	{
+		HanoiMove(N, 1, 2, 3);
+		cout << var << "\n";
+		sw = 1;
+		HanoiMove(N, 1, 2, 3);
 
+	}
 	return 0;
 }
