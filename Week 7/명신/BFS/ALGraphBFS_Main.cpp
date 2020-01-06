@@ -1,7 +1,7 @@
 #include <stdio.h>
-#include "ALGraphDFS.h"
+#include "ALGraphBFS.h"
 
-int main(void)
+int main()
 {
 	ALGraph graph;
 	GraphInit(&graph, 7);
@@ -16,13 +16,11 @@ int main(void)
 
 	ShowGraphEdgeInfo(&graph);
 
-	DFSshowGraphVertex(&graph, A); printf("\n");
-	DFSshowGraphVertex(&graph, C); printf("\n");
-	DFSshowGraphVertex(&graph, E); printf("\n");
-	DFSshowGraphVertex(&graph, G); printf("\n");
+	BFShowGraphVertex(&graph, A); printf("\n");
+	BFShowGraphVertex(&graph, C); printf("\n");
+	BFShowGraphVertex(&graph, E); printf("\n");
+	BFShowGraphVertex(&graph, G); printf("\n");
 
 	GraphDestroy(&graph);
 	return 0;
-
-
 }

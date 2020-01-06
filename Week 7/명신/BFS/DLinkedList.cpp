@@ -74,7 +74,7 @@ int LNext(List* plist, LData* pdata)
 
 LData LRemove(List* plist)
 {
-	Node * rpos = plist->cur;
+	Node* rpos = plist->cur;
 	LData rdata = rpos->data;
 
 	plist->before->next = plist->cur->next;
